@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,7 @@ public class Album {
     private String title;
     private String description;
 
-    @OneToMany(mappedBy = "album", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "album")
     private List<Song> songs;
 
     @Transient

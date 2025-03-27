@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 @Entity
+@Table(name = "authors")
 public class Author {
 
     @Id
@@ -18,9 +19,16 @@ public class Author {
     @Column(name = "author_id")
     private Long authorId;
 
+
     private String name;
     private String description;
     @Column(name = "date_of_creation")
     private LocalDate dateOfCreation;
 
+
+    public Author(String name, String description, LocalDate dateOfCreation) {
+        this.name = name;
+        this.description = description;
+        this.dateOfCreation = dateOfCreation;
+    }
 }

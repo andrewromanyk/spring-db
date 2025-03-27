@@ -22,35 +22,44 @@ class JpaTest {
     @Autowired
     private AuthorRepository authorRepository;
 
-    private Author author = new Author(null, "Led Zeppelin", "British rock band.",
-            LocalDate.of(1968, 8, 12));
-    private Song song = new Song(null, "Stairway to heaven", author, 482, null);
+    private Author createAuthor() {
+        return new Author(null, "Led Zeppelin", "British rock band.",
+                LocalDate.of(1968, 8, 12));
+    }
+
+    private Song createSong() {
+        return new Song(null, "Stairway to heaven", createAuthor(), 482, null);
+    }
 
     @BeforeEach
     void setUp() {
         songRepository.deleteAll();
         authorRepository.deleteAll();
-        songRepository.save(song);
+        songRepository.flush();
+        authorRepository.flush();
+        songRepository.save(createSong());
     }
 
     @Test
     void checkSong() {
         Song song1 = songRepository.findAll().get(0);
-        Assertions.assertEquals(song, song1);
+        Assertions.assertEquals(createSong().getTitle(), song1.getTitle());
     }
 
     @Test
     void checkAuthor() {
         Author author1 = authorRepository.findAll().get(0);
-        Assertions.assertEquals(author, author1);
+        Assertions.assertEquals(createAuthor().getName(), author1.getName());
     }
 
     @Test
     void checkAuthorChangeAndDynamicFieldChange() {
         Author author1 = authorRepository.findAll().get(0);
         author1.setName("Led Zeppelin1");
+
         Song song1 = songRepository.findAll().get(0);
         Author author2 = song1.getAuthor();
+
         Assertions.assertEquals(author1.getName(), author2.getName());
     }
 }

@@ -27,6 +27,10 @@ public class AuthorService {
         return authorRepository.findById(id);
     }
 
+    public Optional<Author> getAuthorByName(String name) {
+        return authorRepository.findByName(name);
+    }
+
     public Author createAuthor(Author author) {
         return authorRepository.save(author);
     }

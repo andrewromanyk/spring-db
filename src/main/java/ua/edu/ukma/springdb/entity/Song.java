@@ -20,13 +20,13 @@ public class Song {
 
     private String title;
 
-    @ManyToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(optional = false, cascade = {CascadeType.MERGE})
     @JoinColumn(name="author_id", nullable=false)
     private Author author;
 
     private Integer duration; // seconds
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "album_id")
     private Album album;
 }
