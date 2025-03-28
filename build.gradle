@@ -37,7 +37,7 @@ dependencies {
     implementation 'com.h2database:h2:2.3.232'
     implementation 'org.postgresql:postgresql'
     annotationProcessor 'org.hibernate.orm:hibernate-jpamodelgen:6.6.9.Final'
-
+    implementation 'org.springframework.data:spring-data-mongodb:5.0.0-M1'
 
     testImplementation "org.testcontainers:testcontainers:1.17.6"
     testImplementation 'org.testcontainers:postgresql:1.20.6'
