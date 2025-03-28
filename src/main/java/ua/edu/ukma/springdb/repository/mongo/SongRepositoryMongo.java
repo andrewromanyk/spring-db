@@ -2,7 +2,6 @@ package ua.edu.ukma.springdb.repository.mongo;
 
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import ua.edu.ukma.springdb.entity.Song;
 import ua.edu.ukma.springdb.entity.mongo.SongMongo;
 
 import java.util.Optional;
