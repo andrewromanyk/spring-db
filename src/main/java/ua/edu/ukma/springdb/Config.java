@@ -1,22 +1,30 @@
 package ua.edu.ukma.springdb;
 
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
-import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.function.Function;
-
 @Configuration
-@EnableTransactionManagement
-@EnableMongoRepositories(basePackages = "ua.edu.ukma.springdb")
+@EnableRedisRepositories
 public class Config {
 
+    @Bean
+    public RedisConnectionFactory connectionFactory() {
+        return new LettuceConnectionFactory();
+    }
+
+    @Bean
+    public RedisTemplate<String , Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(redisConnectionFactory);
+        return template;
+    }
 }
 
